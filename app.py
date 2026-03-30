@@ -11,7 +11,7 @@ import os
 st.set_page_config(page_title="Projet Gabriel Princet", layout="wide")
 st.title("Projet Gestion de Portefeuille Gabriel PRINCET")
 
-# --- DONNÉES DU PORTEFEUILLE ---
+# DONNÉES DU PORTEFEUILLE 
 portefeuille = {
     "UBI.PA": {"quantite": 170, "prix_achat": 11.944},
     "MC.PA": {"quantite": 3, "prix_achat": 604.147},
@@ -142,7 +142,7 @@ alpha_5y = Rp_5y - (Rf + beta_5y * (Rp_b_5y - Rf))
 # --- AFFICHAGE STREAMLIT ---
 st.divider()
 
-st.subheader("1. Résumé du Portefeuille & Performance")
+st.subheader("1. Résumé du Portefeuille Témoin & Performance")
 # PV Globale = Latente + Encaissée (Ventes + Div)
 pv_globale = plus_value_totale + total_encaisse
 performance_globale_pct = (pv_globale / (investi_total + (150 * 29.23))) * 100 # Calcul indicatif sur capital total engagé
@@ -158,7 +158,7 @@ st.divider()
 st.subheader("2. Analyse de Risque & Performance Active (vs MSCI World)")
 df_risque = pd.DataFrame({
     "Métrique": ["Volatilité (1 an)", "Volatilité (5 ans)", "Max Drawdown (1 an)", "Max Drawdown (5 ans)", "Ratio de Sharpe (1 an)", "Ratio de Sharpe (5 ans)", "Corrélation au marché (1 an)", "Corrélation au marché (5 ans)", "Bêta (1 an)", "Bêta (5 ans)", "Alpha de Jensen (1 an)", "Alpha de Jensen (5 ans)"],
-    "Mon Portefeuille": [f"{vol_pf_1y * 100:.2f} %", f"{vol_pf_5y * 100:.2f} %", f"{mdd_pf_1y * 100:.2f} %", f"{mdd_pf_5y * 100:.2f} %", f"{sharpe_pf_1y:.2f}", f"{sharpe_pf_5y:.2f}", f"{corr_pf_msci_1y:.2f}", f"{corr_pf_msci_5y:.2f}", f"{beta_1y:.2f}", f"{beta_5y:.2f}", f"{alpha_1y * 100:.2f} %", f"{alpha_5y * 100:.2f} %"],
+    "Portefeuille Témoin": [f"{vol_pf_1y * 100:.2f} %", f"{vol_pf_5y * 100:.2f} %", f"{mdd_pf_1y * 100:.2f} %", f"{mdd_pf_5y * 100:.2f} %", f"{sharpe_pf_1y:.2f}", f"{sharpe_pf_5y:.2f}", f"{corr_pf_msci_1y:.2f}", f"{corr_pf_msci_5y:.2f}", f"{beta_1y:.2f}", f"{beta_5y:.2f}", f"{alpha_1y * 100:.2f} %", f"{alpha_5y * 100:.2f} %"],
     "MSCI World (Benchmark)": [f"{vol_b_1y * 100:.2f} %", f"{vol_b_5y * 100:.2f} %", f"{mdd_b_1y * 100:.2f} %", f"{mdd_b_5y * 100:.2f} %", f"{sharpe_b_1y:.2f}", f"{sharpe_b_5y:.2f}", "1.00", "1.00", "1.00", "1.00", "0.00 %", "0.00 %"]
 })
 st.dataframe(df_risque, width='stretch', hide_index=True)
@@ -201,7 +201,7 @@ ret_pf_5y_pondere = ret_5y @ poids
 perf_pf = (1 + ret_pf_5y_pondere).cumprod() * 100
 perf_benchmark = (1 + rb_5y).cumprod() * 100
 fig, ax = plt.subplots(figsize=(10, 5))
-ax.plot(perf_pf.index, perf_pf.values, label="Mon Portefeuille", linewidth=2, color="#1f77b4")
+ax.plot(perf_pf.index, perf_pf.values, label="Portefeuille Témoin", linewidth=2, color="#1f77b4")
 ax.plot(perf_benchmark.index, perf_benchmark.values, label="MSCI World (IWDA)", linestyle="--", color="#ff7f0e")
 ax.legend()
 st.pyplot(fig)
