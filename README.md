@@ -33,13 +33,11 @@ Once the download is complete, extract (unzip) the folder to your desktop.
 2. Install the necessary tools (once only)
 Open your terminal (or command prompt) and type the following command to install the professional libraries used:
 
-Bash
-pip install streamlit yfinance pandas numpy matplotlib
+"pip install streamlit yfinance pandas numpy matplotlib"
 3. Launch the Dashboard
 In your terminal, navigate to the project folder and launch the application with:
 
-Bash
-streamlit run filename.py
+"streamlit run"
 Note: Replace filename.py with the exact name of your script (e.g. app.py).
 
 The interface will open immediately in your web browser.
